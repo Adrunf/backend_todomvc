@@ -1,0 +1,8 @@
+-- Your SQL goes here
+
+CREATE TABLE "works"
+(
+id SERIAL PRIMARY KEY,
+work VARCHAR NOT NULL,
+active BOOLEAN NOT NULL
+)
