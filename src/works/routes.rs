@@ -3,6 +3,8 @@ use crate::error_handler::CustomError;
 use actix_web::{delete, get, post, put, web, HttpResponse};
 use serde_json::json;
 
+//Rutas del API
+
 #[get("/works")]
 async fn find_all() -> Result<HttpResponse, CustomError> {
     let works = Works::find_all()?;
