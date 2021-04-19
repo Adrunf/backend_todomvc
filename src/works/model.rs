@@ -24,18 +24,19 @@ pub struct Works {
 
 //Funcionalidades en Works
 impl Works {
+    //Obtener todos los registros
     pub fn find_all() -> Result<Vec<Self>, CustomError> {
         let conn = db::connection()?;
         let works = works::table.load::<Works>(&conn)?;
         Ok(works)
     }
-
+    //Obtener un registro en específico
     pub fn find(id: i32) -> Result<Self, CustomError> {
         let conn = db::connection()?;
         let work = works::table.filter(works::id.eq(id)).first(&conn)?;
         Ok(work)
     }
-
+    //Agregar un registro 
     pub fn create(work: Work) -> Result<Self, CustomError> {
         let conn = db::connection()?;
         let work = Work::from(work);
@@ -44,7 +45,7 @@ impl Works {
             .get_result(&conn)?;
         Ok(work)
     }
-
+    //Actualizar un registro
     pub fn update(id: i32, work: Work) -> Result<Self, CustomError> {
         let conn = db::connection()?;
         let work = diesel::update(works::table)
@@ -53,7 +54,7 @@ impl Works {
             .get_result(&conn)?;
         Ok(work)
     }
-
+    //Eliminar un registro
     pub fn delete(id: i32) -> Result<usize, CustomError> {
         let conn = db::connection()?;
         let res = diesel::delete(works::table.filter(works::id.eq(id))).execute(&conn)?;
